@@ -116,6 +116,7 @@ def task_2(
     input_list_length_and_sentence = (length, sentence)
     print(input_list_length_and_sentence)
     return input_list_length_and_sentence
+<<<<<<< HEAD
 
 
 def task_3(
@@ -392,3 +393,5 @@ def task_8(
     # End of TODO
 
     return result_img
+=======
+>>>>>>> 8daf18d0202c9848f7bcd09c869f3bff6d2b4c11
