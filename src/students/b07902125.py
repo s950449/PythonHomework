@@ -392,7 +392,14 @@ def task_8(
     # TODO: download the image from img_url with the request module
     # and add your student ID on it with draw_name() in the utils module
     # under src/.
-
+    import sys
+    from PIL import Image
+    sys.path.append('../')
+    from utils import draw_text
+    file_name = 'b07902125.jpg'
+    request.urlretrieve(img_url, file_name)
+    result_img = Image.open(file_name)
+    result_img = draw_text(result_img, 'B07902125')
     # You are allowed to change the img_url to your own image URL.
 
     # Display the image:
