@@ -3,9 +3,14 @@ This is the sample code from the homework. You shold NOT modify this file.
 Instead, please copy this file to src/students/<your student ID>.py and
 edit it there.
 '''
+import os
+
+# Define global variables with upper case
+SRC_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+TEST_DATA_DIR = os.path.join(SRC_PATH, 'test_data')
 
 
-def task_1():
+def task_1(dummy=None):
     '''
     Task 1: Basic Syntax and Flake8 Checker
 
@@ -86,7 +91,7 @@ def task_2(
 
     Returns:
         input_list_length_and_sentence: a tuple that contains two elements.
-            The fisrt one is an integer that indicates the length of input_list
+            The first one is an integer that indicates the length of input_list
             The second one is a string that contains the combination of
             input_list[target_index] and input_dictionary[target_key]
 
@@ -98,7 +103,7 @@ def task_2(
             target_key = "5.5"
 
         Returns:
-            sentence = (5, "1900")
+            input_list_length_and_sentence = (5, "1900")
 
     Hints:
         * Try to use print() to print out the inputs.
@@ -155,6 +160,7 @@ def task_3(
         if number % 7 == 0:
             prime_factors_below_10.append(7)
     # End of TODO
+    print(prime_factors_below_10)
     return prime_factors_below_10
 
 
@@ -195,19 +201,19 @@ def task_4(
     # In Python, the for loop could iterate through a list directly
     for number in numbers:
         # TODO: change stars to correct length
-        for i in range(1, number):
-            stars = "*" 
-            list_of_stars.append(stars*i)
+        for i in range(1, number+1):
+            stars = "*"*i
+            list_of_stars.append(stars)
         # End of TODO
 
     # This could be done by the while loop
     list_of_stars_while = []
     i = 0
-    while i <= len(numbers):
+    while i < len(numbers):
         # TODO: change stars to correct length
         j = 1
         while j <= numbers[i]:
-            stars ="*"
+            stars = "*"*j
             j += 1  # This line is equivalant to j = j + 1
             list_of_stars_while.append(stars)
         i += 1
@@ -226,9 +232,9 @@ def task_4(
 
 
 def task_5(
-    input_filename: str = 'test_data/task_5_input.txt',
-    output_filename: str = 'test_data/task_5_output.txt'
-) -> list:
+    input_filename: str = 'task_5_input.txt',
+    output_filename: str = 'task_5_output.txt'
+) -> str:
     '''
     Task 5: I/O with files
 
@@ -244,6 +250,12 @@ def task_5(
         * Use fout.write(something) to write text into the output file
 
     '''
+    input_filename = os.path.join(TEST_DATA_DIR, input_filename)
+    output_filename = os.path.join(TEST_DATA_DIR, output_filename)
+    # Remove previous output file
+    if os.path.exists(output_filename):
+        os.remove(output_filename)
+
     with open(input_filename, 'r') as fin, open(output_filename, 'w') as fout:
         lines = fin.readlines()
         print(f"=======> Input file content:")
@@ -251,15 +263,16 @@ def task_5(
             print(f"{line}")
         # TODO: read the content of the input file, where words are separate by
         # commas. Please remove the commas and write words to the output file
+            for word in line.split(','):
+                fout.write(word)
         pass
     # End of TODO
 
     with open(output_filename, 'r') as fin:
         lines = fin.readlines()
         print(f"=======> Output file content:")
-        for line in lines:
-            print(f"{line}")
-        return lines
+        print(lines)
+        return "".join(lines)
 
 
 def task_6(
@@ -299,7 +312,7 @@ def task_6(
         '''
         # TODO: use the above functions to calculate cosine similarity of
         # the two vectors v1 and v2
-        cos_sim = 0
+        cos_sim = dot_product(v1, v2) / (norm(v1)*norm(v2))
         # End of TODO
 
         return cos_sim
@@ -348,7 +361,8 @@ def task_7(
         * Use <created object>.<object function> to call object function
     '''
     # TODO: create a student object with different words to say
-    student = None
+    student = Student(student_id, time)
+    student.set_words_to_say('HI')
     # End of TODO
 
     print(student.hello())
