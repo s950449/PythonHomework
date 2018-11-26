@@ -5,7 +5,7 @@ edit it there.
 '''
 
 
-def task_1():
+def task_1(dummy=None):
     '''
     Task 1: Basic Syntax and Flake8 Checker
 
